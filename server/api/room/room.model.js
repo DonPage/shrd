@@ -7,7 +7,8 @@ var RoomSchema = new Schema({
   name: String,
   game: String,
   players: Array,
-  active: Boolean
+  active: Boolean,
+  inProgress: Boolean
 });
 
 module.exports = mongoose.model('Room', RoomSchema);

@@ -5,7 +5,8 @@ angular.module('shrdApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'btford.socket-io'
+  'btford.socket-io',
+  'monospaced.qrcode'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
