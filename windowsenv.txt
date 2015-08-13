@@ -1,0 +1,10 @@
+This is just for me (don) when getting the project running on windows.
+
+1. Run this command: (git bash)
+mongod --directoryperdb --dbpath C:/mongo/data/db --logpath C:/mongo/log/mongodb.log --logappend
+
+2. Run this command: (git bash)
+mongo
+
+3. Open cmd in root and run this command:
+grunt serve

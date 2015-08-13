@@ -1,0 +1,48 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="col-md-12">
+  <!--This is the createroom view. {{ message }}-->
+
+
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+
+    <h2>Create Room</h2>
+
+    <form ng-submit="submitRoom(formData)">
+
+      <!-- NAME INPUT -->
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" ng-model="formData.name" minlength="1">
+      </div>
+
+      <!-- =============================================== -->
+      <!-- RADIO BUTTONS -->
+      <label>Chicken or the Egg?</label>
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="gameName" value="Misc Game 1" ng-model="formData.gameName">
+            Misc Game 1
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="gameName" value="Random Game 2" ng-model="formData.gameName">
+            Random Game 2
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="gameName" value="Test Game 3" ng-model="formData.gameName">
+            Test Game 3
+          </label>
+        </div>
+      </div>
+      <!-- =============================================== -->
+
+      <button type="submit" class="btn btn-danger btn-lg">Create!</button>
+
+    </form>
+  </div>
+</div>
