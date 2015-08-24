@@ -36,6 +36,39 @@ exports.create = function(req, res) {
   });
 };
 
+// Creates a new player in the roomId.
+exports.createPlayer = function(req, res) {
+  console.log("req", req.body);
+  console.log("req", req.params.roomID);
+  console.log("CREATE PLAYER@@@@@@@@@@@@@@");
+
+  Room.findById(req.params.roomID, function (err, room) {
+    console.log("req.params.roomID", req.params.roomID);
+    if (err) return handleError(res, err);
+    if (!room) return res.status(404).send('Not Found');
+
+    console.log("room", room);
+    console.log("room.players", room.players);
+    var allPlayers = room.players;
+    allPlayers.push(req.body);
+
+    var updated = _.merge(room.players, allPlayers);
+    room.players = updated;
+
+    console.log("updated", updated);
+
+    room.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(room.players);
+    });
+  });
+
+  //Room.create(req.body, function(err, room) {
+  //  if(err) { return handleError(res, err); }
+  //  return res.status(201).json(room);
+  //});
+};
+
 // Updates an existing room in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
