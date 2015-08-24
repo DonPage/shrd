@@ -67,14 +67,6 @@ angular.module('shrdApp')
         console.log("obj", obj);
         cb = cb || angular.noop;
 
-
-        /**
-         * Syncs room connection on 'model:connection'
-         */
-        socket.on(modelName + ':emit', function (item) {
-          console.log("CONNECT", item);
-        });
-
         /**
          * Syncs item creation/updates on 'model:save'
          */

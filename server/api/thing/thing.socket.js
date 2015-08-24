@@ -13,12 +13,9 @@ exports.register = function(socket) {
   thing.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
-}
+};
 
 function onSave(socket, doc, cb) {
-  console.log("doc", doc);
-  console.log("cb", cb);
-
   socket.emit('thing:save', doc);
 }
 

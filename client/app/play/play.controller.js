@@ -19,7 +19,7 @@ angular.module('shrdApp')
 
     $http.post('/api/rooms/' + $routeParams.roomID + '/' + $scope.name, {name: $scope.name, active: true})
       .success(function (data) {
-        console.log("data", data);
+        console.log("newPlayer", data);
 
     })
 

@@ -47,7 +47,6 @@ exports.createPlayer = function(req, res) {
     if (err) return handleError(res, err);
     if (!room) return res.status(404).send('Not Found');
 
-    console.log("room", room);
     console.log("room.players", room.players);
     var allPlayers = room.players;
     allPlayers.push(req.body);

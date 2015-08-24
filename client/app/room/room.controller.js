@@ -22,7 +22,7 @@ angular.module('shrdApp')
     $http.get('/api/rooms/' + $routeParams.roomID).success(function (roomData) {
       console.log("roomData: ", roomData);
       $scope.roomData = roomData;
-      socket.roomUpdates('conn', $scope.roomData);
+      //socket.roomUpdates('room', $scope.roomData);
     });
 
 
