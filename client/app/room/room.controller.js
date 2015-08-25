@@ -6,7 +6,7 @@ angular.module('shrdApp')
     console.log("$routeParams", $routeParams);
 
     /**
-     * TestRoom: http://localhost:9000/room/55cc0346c82d70f43c10ec38
+     * TestRoom: http://localhost:9000/room/55dbaf74e8a2a36c2e0b47a6
      */
 
     console.log("room controller");
@@ -22,7 +22,10 @@ angular.module('shrdApp')
     $http.get('/api/rooms/' + $routeParams.roomID).success(function (roomData) {
       console.log("roomData: ", roomData);
       $scope.roomData = roomData;
-      //socket.roomUpdates('room', $scope.roomData);
+      socket.roomUpdates('room', $scope.roomData, function (event, newData, obj) {
+        console.log(event, newData, obj);
+        $scope.roomData = newData;
+      });
     });
 
 

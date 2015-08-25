@@ -63,28 +63,19 @@ angular.module('shrdApp')
 
 
       roomUpdates: function (modelName, obj, cb) {
-        console.log("modelName", modelName);
-        console.log("obj", obj);
+        //console.log("modelName", modelName);
+        //console.log("obj", obj);
         cb = cb || angular.noop;
 
         /**
          * Syncs item creation/updates on 'model:save'
          */
-        socket.on(modelName + ':save', function (item) {
-          var oldItem = _.find(obj, {_id: item._id});
-          var index = obj.indexOf(oldItem);
+        socket.on(modelName + ':save', function (newData) {
           var event = 'created';
+          //console.log("item", item);
+          //console.log("obj", obj);
 
-          // replace oldItem if it exists
-          // otherwise just add item to the collection
-          if (oldItem) {
-            obj.splice(index, 1, item);
-            event = 'updated';
-          } else {
-            obj.push(item);
-          }
-
-          cb(event, item, obj);
+          cb(event, newData, obj);
         });
 
         /**
