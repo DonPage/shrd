@@ -16,7 +16,7 @@ exports.register = function(socket) {
 };
 
 function onSave(socket, doc, cb) {
-  socket.emit('room:save', doc);
+  socket.emit('room-'+doc._id+':save', doc);
 }
 
 function onRemove(socket, doc, cb) {
