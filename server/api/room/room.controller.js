@@ -38,23 +38,23 @@ exports.create = function(req, res) {
 
 // Creates a new player in the roomId.
 exports.createPlayer = function(req, res) {
-  console.log("req", req.body);
-  console.log("req", req.params.roomID);
-  console.log("CREATE PLAYER@@@@@@@@@@@@@@");
+  //console.log("req", req.body);
+  //console.log("req", req.params.roomID);
+  //console.log("CREATE PLAYER@@@@@@@@@@@@@@");
 
   Room.findById(req.params.roomID, function (err, room) {
-    console.log("req.params.roomID", req.params.roomID);
+    //console.log("req.params.roomID", req.params.roomID);
     if (err) return handleError(res, err);
     if (!room) return res.status(404).send('Not Found');
 
-    console.log("room.players", room.players);
+    //console.log("room.players", room.players);
     var allPlayers = room.players;
     allPlayers.push(req.body);
 
     var updated = _.merge(room.players, allPlayers);
     room.players = updated;
 
-    console.log("updated", updated);
+    //console.log("updated", updated);
 
     room.save(function (err) {
       if (err) { return handleError(res, err); }

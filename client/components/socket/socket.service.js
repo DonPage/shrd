@@ -16,6 +16,15 @@ angular.module('shrdApp')
     });
 
     return {
+      socketIO: function (name,cb) {
+        cb = cb || angular.noop;
+
+        socket.on(name, function (data) {
+          cb(data)
+        })
+
+      },
+
       socket: socket,
 
       /**
@@ -62,10 +71,13 @@ angular.module('shrdApp')
       },
 
 
+
       roomUpdates: function (modelName, obj, cb) {
         //console.log("modelName", modelName);
         //console.log("obj", obj);
         cb = cb || angular.noop;
+
+
 
         /**
          * Syncs item creation/updates on 'model:save'
@@ -78,14 +90,32 @@ angular.module('shrdApp')
           cb(event, newData, obj);
         });
 
-        /**
-         * Syncs removed items on 'model:remove'
-         */
-        socket.on(modelName + ':remove', function (item) {
-          var event = 'deleted';
-          _.remove(obj, {_id: item._id});
-          cb(event, item, obj);
-        });
+      },
+
+      playerUpdates: function (modelName, obj, cb) {
+        //console.log("modelName", modelName);
+        //console.log("obj", obj);
+        cb = cb || angular.noop;
+
+        //console.log('PLAYER ' + modelName + ':player-' + obj.name);
+
+        //socket.emit(modelName + ':player-' + obj.name, obj);
+
+        //sending to server
+        socket.emit('playerUpdate', obj);
+
+
+      },
+
+      syncPlayerEvents: function (modelName, obj, cb) {
+        console.log("syncPlayerEvents:", modelName, obj);
+        cb = cb || angular.noop;
+
+        socket.on('playerUpdate', function (data) {
+          console.log("back from server:", data);
+          cb(data);
+        })
+
       },
 
       /**
