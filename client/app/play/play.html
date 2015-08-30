@@ -1,7 +1,26 @@
 <div class="col-md-12">
-This is the play view. {{ message }}
+  This is the play view. {{ message }}
 </div>
 
-<input ng-model="playerData" type="text" ng-keyup="updatePlayerData()"/>
-<h4>{{ playerData }}</h4>
-<h1>{{ name }}</h1>
+
+<div ng-switch on="stage">
+  <!--<h1>{{ stage }}</h1>-->
+
+  <div ng-switch-when="login">
+    <h3>Login Stage</h3>
+
+    <button ng-click="loginStage('login')">Login</button>
+    <button ng-click="loginStage('register')">Register</button>
+    <button ng-click="loginStage('guess')">Continue as guess</button>
+  </div>
+
+  <div ng-switch-when="readyToPlay">
+    <h3>ready to play</h3>
+    <input ng-model="playerData" type="text" ng-keyup="updatePlayerData()"/>
+    <h4>{{ playerData }}</h4>
+
+    <h1>{{ name }}</h1>
+  </div>
+</div>
+
+
