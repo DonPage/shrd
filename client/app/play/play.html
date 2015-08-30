@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  This is the play view. {{ message }} {{ user.name }}
+  <!--This is the play view. {{ message }} {{ user.name }}-->
 </div>
 
 
@@ -25,11 +25,36 @@
   </div>
 
   <div ng-switch-when="controller">
-    <h3>ready to play</h3>
-    <input ng-model="playerData" type="text" ng-keyup="updatePlayerData()"/>
-    <h4>{{ playerData }}</h4>
+    <!--<h3>ready to play</h3>-->
+    <!--<input ng-model="playerData" type="text" ng-keyup="updatePlayerData()"/>-->
+    <div class="controllers" ng-switch on="controllerType">
 
-    <h1>{{ name }}</h1>
+      <div id="custom-controller-1" ng-switch-when="custom-controller-1">
+
+        <div class="circle" hm-tap="move($event)">
+
+        </div>
+
+      </div>
+
+      <!--NES Controller-->
+      <div id="nes-controller" ng-switch-when="nes-controller">
+        <div class="pad-area">
+          <div class="dpad">
+            <div id="up" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
+            <div id="down" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
+            <div id="left" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
+            <div id="right" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
   </div>
 </div>
 

@@ -6,7 +6,8 @@ angular.module('shrdApp', [
   'ngSanitize',
   'ngRoute',
   'btford.socket-io',
-  'monospaced.qrcode'
+  'monospaced.qrcode',
+  'hmTouchEvents'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

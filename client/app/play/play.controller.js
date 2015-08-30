@@ -71,8 +71,6 @@ angular.module('shrdApp')
             $scope.user = genUser();
 
 
-
-
           }
 
         }
@@ -85,8 +83,21 @@ angular.module('shrdApp')
       console.log("initController", user);
       if (!user) return false;
 
+      //delete any redirects:
+      localStorage.delete('redirect');
+
       $scope.user = user;
+
+      //switch stage
       $scope.stage = 'controller';
+
+      //choose default controller:
+      $scope.controllerType = 'nes-controller';
+
+      $scope.move = function (event) {
+        console.log("event", event);
+      }
+
 
 
 
