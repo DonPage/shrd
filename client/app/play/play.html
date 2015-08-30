@@ -38,21 +38,12 @@
       </div>
 
       <!--NES Controller-->
-      <div id="nes-controller" ng-switch-when="nes-controller">
-        <div class="pad-area">
-          <div class="dpad">
-            <div id="up" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
-            <div id="down" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
-            <div id="left" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
-            <div id="right" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
-
-          </div>
-        </div>
+      <div ng-switch-when="nes-controller">
+        <div ng-include="'components/game-controllers/nes-controller.html'"></div>
       </div>
 
 
     </div>
-
 
 
   </div>
