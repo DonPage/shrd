@@ -6,7 +6,7 @@ angular.module('shrdApp')
     console.log("$routeParams", $routeParams);
 
     /**
-     * TestRoom: localhost:9000/play/55dbbd547bbabc6038329930
+     * TestRoom: http://localhost:9000/room/55e272e87ccd6cf02635f644
      */
 
     console.log("room controller");
@@ -28,31 +28,28 @@ angular.module('shrdApp')
         //console.log(event, newData, obj);
         $scope.roomData = newData;
 
-        //for (var i = 0; i < newData.players.length; i++) {
-        //  var player = newData.players[i];
-        //
-        //  socket.playerUpdates('testsock', player, function (data) {
-        //    $scope.testEvent = data.data;
-        //  });
-        //
-        //  console.log("FRONT:", 'room-' + roomData._id + ':player-' + player.name);
-        //  socket.playerUpdates('room-' + roomData._id + ':player-' + player.name, player, function (event, obj) {
-        //    //console.log("event", event);
-        //    $scope.testEvent = event;
-        //  });
-        //
-        //}
+        for (var i = 0; i < newData.players.length; i++) {
+          var player = newData.players[i];
+
+          console.log("FRONT:", 'room-' + roomData._id + ':player-' + player.name);
+          socket.syncPlayerEvents('room-' + roomData._id + ':player-' + player.name, player, function (data) {
+            //console.log("event", event);
+            $scope.testEvent = data.data;
+          });
+
+        }
       });
     });
 
-    socket.syncPlayerEvents('playerEvent',{room: $routeParams.roomID}, function (data) {
-      console.log("back from server:", data);
-      $scope.testEvent = data;
-    });
-
-    socket.socketIO('playerEvent', function (data) {
-      console.log("data", data);
-    });
+    //socket.syncPlayerEvents('playerEvent',{room: $routeParams.roomID}, function (data) {
+    //  console.log("back from server:", data);
+    //  $scope.testEvent = data;
+    //});
+    //
+    //socket.socketIO('playerEvent', function (data) {
+    //  console.log("data", data);
+    //  $scope.testEvent = data.data;
+    //});
 
 
 

@@ -21,9 +21,16 @@ function onConnect(socket) {
     console.info('[%s] %s', socket.address, JSON.stringify(data, null, 2));
   });
 
+  socket.emit('playerEvent', {data: 'test data plz work.'});
+
+  require('../api/room/playRoom.socket').register(socket);
+
   // Insert sockets below
   require('../api/room/room.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
+
+
+
 }
 
 module.exports = function (socketio) {
@@ -46,17 +53,17 @@ module.exports = function (socketio) {
   socketio.on('connection', function (socket) {
 
     //player events
-    socket.on('playerUpdate', function (obj) {
-      console.log("obj", obj);
-      var path = 'room-' + obj.room + ':player-' + obj.name;
-      //console.log("path", path);
-      //socket.emit(path, obj);
-      //socket.emit('playerEvent', obj);
-
-      //playerEvents(socket, obj);
-      socket.emit('playerEvent', obj);
-
-    });
+    //socket.on('playerUpdate', function (obj) {
+    //  console.log("playerUpdate:", obj);
+    //  var path = 'room-' + obj.room + ':player-' + obj.name;
+    //  //console.log("path", path);
+    //  //socket.emit(path, obj);
+    //  //socket.emit('playerEvent', obj);
+    //
+    //  //playerEvents(socket, obj);
+    //  socket.emit('playerEvent', obj);
+    //
+    //});
 
     socket.address = socket.handshake.address !== null ?
             socket.handshake.address.address + ':' + socket.handshake.address.port :

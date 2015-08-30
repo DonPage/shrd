@@ -17,9 +17,11 @@ angular.module('shrdApp')
 
     return {
       socketIO: function (name,cb) {
+        console.log("socketIO", name, cb);
         cb = cb || angular.noop;
 
         socket.on(name, function (data) {
+          console.log("socket callback");
           cb(data)
         })
 
@@ -93,13 +95,7 @@ angular.module('shrdApp')
       },
 
       playerUpdates: function (modelName, obj, cb) {
-        //console.log("modelName", modelName);
-        //console.log("obj", obj);
         cb = cb || angular.noop;
-
-        //console.log('PLAYER ' + modelName + ':player-' + obj.name);
-
-        //socket.emit(modelName + ':player-' + obj.name, obj);
 
         //sending to server
         socket.emit('playerUpdate', obj);
@@ -111,7 +107,7 @@ angular.module('shrdApp')
         console.log("syncPlayerEvents:", modelName, obj);
         cb = cb || angular.noop;
 
-        socket.on('playerUpdate', function (data) {
+        socket.on(modelName, function (data) {
           console.log("back from server:", data);
           cb(data);
         })
