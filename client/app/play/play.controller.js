@@ -4,49 +4,96 @@ angular.module('shrdApp')
   .controller('PlayCtrl', function ($scope, $http, socket, $routeParams, Auth, localStorage, $location) {
     $scope.message = 'Hello';
 
+    /**
+     * Test Room: http://localhost:9000/play/55e272e87ccd6cf02635f644
+     */
+
     /*
      * We must determine if the user is logged in.
      */
     $scope.userName = null;
     $scope.stage = null;
 
-    if (Auth.getCurrentUser().name) {
-      console.log("Auth.getCurrentUser", Auth.getCurrentUser());
+    var pre = ['Test', 'Basic', 'Random'];
+    var sub = ['User', 'Player', 'Person'];
+    function genUser(){
+      var name = pre[~~(Math.random()*pre.length)] + '' + sub[~~(Math.random()*sub.length)] + '.' + (Math.floor(Math.random() * (9999 - 1111 + 1)) + 1111);
 
-      $scope.userName = Auth.getCurrentUser().name;
-    } else {
-      console.log("user not logged in.");
-      $scope.stage = 'login';
+      /**
+       * Test user stuff:
+       $promise: Promise
+       $resolved: true
+       __v: 0
+       _id: "55e34842b2dce3bc1e5abdaa"
+       email: "test@test.com"
+       name: "Test User"
+       provider: "local"
+       role: "user"
+       */
 
-      $scope.loginStage = function (choice) {
-        console.log("choice", choice);
+      var user = {
+        _id: name.split('.')[1],
+        email: false,
+        name: name,
+        provider: 'local',
+        role: 'guess'
+      };
 
-        if (choice == 'login') {
-          console.log("$location", $location.$$absUrl);
-          
-        }
+      console.log("Guess: ", user);
 
-      }
-
-
+      return user;
     }
 
+    Auth.isLoggedInAsync(function (value) {
+      console.log("isLoggedInAsync:", value);
+
+      if (value) {//if true
+
+        $scope.initController(Auth.getCurrentUser());
+
+      } else { //if false
+        console.log("user not logged in.");
+
+        $scope.stage = 'login';
+
+        $scope.loginStage = function (choice) {
+
+          if (choice != 'guess') {
+            localStorage.create('redirect', $location.$$path);
+            $location.path('/' + choice)
+          }
+
+          else if (choice == 'guess') {
+            console.log("choice", choice);
+
+            $scope.stage = 'createGuess';
+
+            $scope.user = genUser();
 
 
 
 
+          }
+
+        }
+
+      }//else if false
+
+    });//isLoggedInAsync();
+
+    $scope.initController = function (user) {
+      console.log("initController", user);
+      if (!user) return false;
+
+      $scope.user = user;
+      $scope.stage = 'controller';
 
 
 
-    //TODO: this is for testing only.
-    //var pre = ['Test', 'Basic', 'Random'];
-    //var sub = ['User', 'Player', 'Person'];
-    //function genPlayerName(){
-    //  return pre[~~(Math.random()*pre.length)] + '' + sub[~~(Math.random()*sub.length)] + (Math.floor(Math.random() * (999 - 111 + 1)) + 111);
-    //}
-    //
-    //
-    //$scope.name = genPlayerName();
+
+    };
+
+
     //
     //
     //$http.post('/api/rooms/' + $routeParams.roomID + '/' + $scope.name, {name: $scope.name, active: true})
@@ -73,8 +120,6 @@ angular.module('shrdApp')
     //  //})
     //  socket.playerUpdates('playerUpdate', obj)
     //}
-
-
 
 
   });

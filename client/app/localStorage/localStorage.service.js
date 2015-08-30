@@ -36,7 +36,7 @@ angular.module('shrdApp')
         var value = localStorage.getItem(key);
 
         if (!value) {
-          return false;
+          cb(false)
         } else {
           cb(value);
         }
