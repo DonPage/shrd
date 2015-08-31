@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shrdApp')
-  .controller('PlayCtrl', function ($scope, $http, socket, $routeParams, Auth, localStorage, $location) {
+  .controller('PlayCtrl', function ($scope, $http, socket, $routeParams, Auth, localStorage, $location, $window) {
     $scope.message = 'Hello';
 
     /**
@@ -14,35 +14,7 @@ angular.module('shrdApp')
     $scope.userName = null;
     $scope.stage = null;
 
-    var pre = ['Test', 'Basic', 'Random'];
-    var sub = ['User', 'Player', 'Person'];
-    function genUser(){
-      var name = pre[~~(Math.random()*pre.length)] + '' + sub[~~(Math.random()*sub.length)] + '.' + (Math.floor(Math.random() * (9999 - 1111 + 1)) + 1111);
-
-      /**
-       * Test user stuff:
-       $promise: Promise
-       $resolved: true
-       __v: 0
-       _id: "55e34842b2dce3bc1e5abdaa"
-       email: "test@test.com"
-       name: "Test User"
-       provider: "local"
-       role: "user"
-       */
-
-      var user = {
-        _id: name.split('.')[1],
-        email: false,
-        name: name,
-        provider: 'local',
-        role: 'guess'
-      };
-
-      console.log("Guess: ", user);
-
-      return user;
-    }
+    console.log("PlayController", Auth.getCurrentUser());
 
     Auth.isLoggedInAsync(function (value) {
       console.log("isLoggedInAsync:", value);
@@ -56,20 +28,21 @@ angular.module('shrdApp')
 
         $scope.stage = 'login';
 
+        //If user is not logged in they much choose whether to login, register, or continue as guest.
         $scope.loginStage = function (choice) {
 
           if (choice != 'guess') {
             localStorage.create('redirect', $location.$$path);
-            $location.path('/' + choice)
+            $location.path('/' + choice);
           }
 
           else if (choice == 'guess') {
             console.log("choice", choice);
 
-            $scope.stage = 'createGuess';
-
-            $scope.user = genUser();
-
+            Auth.createGuest(function (guest) {
+              console.log("guest", guest);
+              $scope.initController(Auth.getCurrentUser())
+            })
 
           }
 
@@ -93,15 +66,6 @@ angular.module('shrdApp')
 
       //choose default controller:
       $scope.controllerType = 'nes-controller';
-
-      $scope.move = function (event) {
-        console.log("event", event);
-      }
-
-
-
-
-
     };
 
 

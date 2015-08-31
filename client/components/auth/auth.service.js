@@ -25,6 +25,7 @@ angular.module('shrdApp')
           password: user.password
         }).
         success(function(data) {
+            console.log("login:", data);
           $cookieStore.put('token', data.token);
           currentUser = User.get();
           deferred.resolve(data);
@@ -63,12 +64,40 @@ angular.module('shrdApp')
           function(data) {
             $cookieStore.put('token', data.token);
             currentUser = User.get();
+            console.log("createUser user:", user);
+            console.log("createUser data:", data);
+            console.log("createUser User:", User);
+            console.log("createuser currentUser:", currentUser);
+
             return cb(user);
           },
           function(err) {
             this.logout();
             return cb(err);
           }.bind(this)).$promise;
+      },
+
+      /**
+       * Create a new guest
+       * Saved in local storage.
+       */
+      createGuest: function (cb) {
+        cb = cb || angular.noop;
+
+        var pre = ['Test', 'Basic', 'Random'];
+        var sub = ['User', 'Player', 'Person'];
+
+        var name = pre[~~(Math.random()*pre.length)] + '' + sub[~~(Math.random()*sub.length)] + '.' + (Math.floor(Math.random() * (9999 - 1111 + 1)) + 1111);
+
+        var user = {
+          _id: name.split('.')[1],
+          email: false,
+          name: name,
+          provider: 'local',
+          role: 'guest'
+        };
+        currentUser = user;
+        cb(currentUser)
       },
 
       /**
@@ -114,6 +143,7 @@ angular.module('shrdApp')
        * Waits for currentUser to resolve before checking if user is logged in
        */
       isLoggedInAsync: function(cb) {
+        //console.log("auth.service.isLoggedInAsync:", currentUser);
         if(currentUser.hasOwnProperty('$promise')) {
           currentUser.$promise.then(function() {
             cb(true);
