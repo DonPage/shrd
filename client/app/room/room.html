@@ -12,6 +12,6 @@
 <div>
   <h1>players - {{ testEvent }}</h1>
   <ul>
-    <li ng-repeat="player in roomData.players">{{ player.name }} - {{ player.active }}</li>
+    <li ng-repeat="player in roomPlayers">{{ player.name }} - {{ player.active }} - {{ player.direction }}</li>
   </ul>
 </div>

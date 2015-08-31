@@ -64,10 +64,6 @@ angular.module('shrdApp')
           function(data) {
             $cookieStore.put('token', data.token);
             currentUser = User.get();
-            console.log("createUser user:", user);
-            console.log("createUser data:", data);
-            console.log("createUser User:", User);
-            console.log("createuser currentUser:", currentUser);
 
             return cb(user);
           },

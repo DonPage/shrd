@@ -16,13 +16,6 @@
 
   </div>
 
-  <div ng-switch-when="createGuess">
-    <form ng-submit="initController(user)">
-      <input type="text" placeholder="{{ user.name }}" value="{{ user.name }}" ng-model="GName" disabled/>
-      <input type="submit" value="continue"/>
-
-    </form>
-  </div>
 
   <div ng-switch-when="controller">
     <!--<h3>ready to play</h3>-->

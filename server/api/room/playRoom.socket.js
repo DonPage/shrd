@@ -12,9 +12,9 @@ exports.register = function(socket){
 
 
   socket.on('playerUpdate', function (obj) {
-    console.log("playerUpdateeeeee:", obj);
-    var path = 'room-' + obj.room + ':player-' + obj.name;
-    //console.log("path", path);
+    console.log("playerUpdateeeeee:");
+    var path = 'room-' + obj.room + ':player-' + obj._id;
+    console.log("path", path);
     socket.broadcast.emit(path, obj);
     //socket.emit('playerEvent', obj);
 

@@ -1,10 +1,22 @@
-<div id="nes-controller">
+<div id="nes-controller" ng-controller="ControllerEvents">
   <div class="pad-area">
     <div class="dpad">
-      <div id="up" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
-      <div id="down" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
-      <div id="left" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
-      <div id="right" class="direction"><span class="glyphicon glyphicon-arrow-up"></span></div>
+      <div id="up" class="direction"
+           hm-recognizer-options='[{"time":10}, {"preventDefault":true}]'
+           hm-press="direction($event)"
+           hm-pressup="endDirection($event)"><span class="glyphicon glyphicon-arrow-up"></span></div>
+      <div id="down" class="direction"
+           hm-recognizer-options='[{"time":10}, {"preventDefault":true}]'
+           hm-press="direction($event)"
+           hm-pressup="endDirection($event)"><span class="glyphicon glyphicon-arrow-up"></span></div>
+      <div id="left" class="direction"
+           hm-recognizer-options='[{"time":10}, {"preventDefault":true}]'
+           hm-press="direction($event)"
+           hm-pressup="endDirection($event)"><span class="glyphicon glyphicon-arrow-up"></span></div>
+      <div id="right" class="direction"
+           hm-recognizer-options='[{"time":10}, {"preventDefault":true}]'
+           hm-press="direction($event)"
+           hm-pressup="endDirection($event)"><span class="glyphicon glyphicon-arrow-up"></span></div>
     </div>
   </div>
 </div>

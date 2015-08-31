@@ -17,7 +17,8 @@ angular.module('shrdApp')
     };
 
 
-    $scope.roomData = null;
+    $scope.roomData = {};
+    $scope.roomPlayers = {};
 
     $scope.testEvent = '';
 
@@ -28,16 +29,38 @@ angular.module('shrdApp')
         //console.log(event, newData, obj);
         $scope.roomData = newData;
 
-        for (var i = 0; i < newData.players.length; i++) {
-          var player = newData.players[i];
-
-          console.log("FRONT:", 'room-' + roomData._id + ':player-' + player.name);
-          socket.syncPlayerEvents('room-' + roomData._id + ':player-' + player.name, player, function (data) {
-            //console.log("event", event);
-            $scope.testEvent = data.data;
-          });
+        for (var t = 0; t < newData.players.length; t++) {
+          var player = newData.players[t];
+          $scope.roomPlayers[player._id] = player
 
         }
+
+        console.log("$scope.roomPlayers", $scope.roomPlayers);
+
+        for (var userID in $scope.roomPlayers) {
+          if ($scope.roomPlayers.hasOwnProperty(userID)) {
+            console.log("user", userID);
+            socket.syncPlayerEvents('room-' + $routeParams.roomID + ':player-' + userID, $scope.roomPlayers[userID], function (data) {
+              //console.log("event", event);
+              console.log("player:", data.name, data.direction);
+              $scope.roomPlayers[data._id].direction = data.direction;
+              console.log($scope.roomPlayers[data._id]);
+
+            });
+          }
+        }
+
+        //for (var i = 0; i < newData.players.length; i++) {
+        //  var player = newData.players[i];
+        //
+        //  console.log("FRONT:", 'room-' + roomData._id + ':player-' + player.name);
+        //  socket.syncPlayerEvents('room-' + roomData._id + ':player-' + player.name, player, function (data) {
+        //    //console.log("event", event);
+        //    console.log("player:", data.name, data.direction);
+        //
+        //  });
+        //
+        //}
       });
     });
 
@@ -50,7 +73,6 @@ angular.module('shrdApp')
     //  console.log("data", data);
     //  $scope.testEvent = data.data;
     //});
-
 
 
   });

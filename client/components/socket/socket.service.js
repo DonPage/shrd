@@ -104,11 +104,11 @@ angular.module('shrdApp')
       },
 
       syncPlayerEvents: function (modelName, obj, cb) {
-        console.log("syncPlayerEvents:", modelName, obj);
+        console.log("syncPlayerEvents:", modelName);
         cb = cb || angular.noop;
 
         socket.on(modelName, function (data) {
-          console.log("back from server:", data);
+          //console.log("back from server:", data);
           cb(data);
         })
 

@@ -14,10 +14,8 @@ angular.module('shrdApp')
     $scope.userName = null;
     $scope.stage = null;
 
-    console.log("PlayController", Auth.getCurrentUser());
 
     Auth.isLoggedInAsync(function (value) {
-      console.log("isLoggedInAsync:", value);
 
       if (value) {//if true
 
@@ -69,32 +67,7 @@ angular.module('shrdApp')
     };
 
 
-    //
-    //
-    //$http.post('/api/rooms/' + $routeParams.roomID + '/' + $scope.name, {name: $scope.name, active: true})
-    //  .success(function (data) {
-    //    console.log("newPlayer", data);
-    //});
-    //
-    //
-    //$scope.playerData = '';
-    //
-    //$scope.updatePlayerData = function () {
-    //  if ($scope.playerData == '') {
-    //    return;
-    //  }
-    //  console.log("$scope.playerData", $scope.playerData);
-    //  //socket.broadcast.to($routeParams.roomID).emit('updatePlayerData', $scope.playerData);
-    //  var obj = {
-    //    name: $scope.name,
-    //    data: $scope.playerData,
-    //    room: $routeParams.roomID
-    //  };
-    //  //socket.playerUpdates('room-' + $routeParams.roomID, obj, function (event, newData) {
-    //  //
-    //  //})
-    //  socket.playerUpdates('playerUpdate', obj)
-    //}
+
 
 
   });
