@@ -2,11 +2,9 @@
 
 angular.module('shrdApp')
   .controller('RoomCtrl', function ($scope, $location, $routeParams, $http, socket) {
-    console.log("$location", $location);
-    console.log("$routeParams", $routeParams);
 
     /**
-     * TestRoom: http://localhost:9000/room/55e272e87ccd6cf02635f644
+     * TestRoom: http://localhost:9000/room/55e76b36c826dbe82bab9636
      */
 
     console.log("room controller");
@@ -18,7 +16,6 @@ angular.module('shrdApp')
 
 
     $scope.roomData = {};
-    $scope.roomPlayers = {};
 
     $scope.testEvent = '';
 
@@ -31,48 +28,25 @@ angular.module('shrdApp')
 
         for (var t = 0; t < newData.players.length; t++) {
           var player = newData.players[t];
-          $scope.roomPlayers[player._id] = player
+          console.log("player", player);
+          //sync room id with player id.
+          socket.syncPlayerEvents('room-' + $routeParams.roomID + ':player-' + player._id, player, function (data) {
 
-        }
-
-        console.log("$scope.roomPlayers", $scope.roomPlayers);
-
-        for (var userID in $scope.roomPlayers) {
-          if ($scope.roomPlayers.hasOwnProperty(userID)) {
-            console.log("user", userID);
-            socket.syncPlayerEvents('room-' + $routeParams.roomID + ':player-' + userID, $scope.roomPlayers[userID], function (data) {
-              //console.log("event", event);
-              console.log("player:", data.name, data.direction);
-              $scope.roomPlayers[data._id].direction = data.direction;
-              console.log($scope.roomPlayers[data._id]);
-
+            console.log("data", data);
+            var playerIdx = _.findIndex($scope.roomData.players, function(chr){
+              return chr._id == data._id;
             });
-          }
+
+            $scope.roomData.players[playerIdx] = data;
+
+          })
         }
 
-        //for (var i = 0; i < newData.players.length; i++) {
-        //  var player = newData.players[i];
-        //
-        //  console.log("FRONT:", 'room-' + roomData._id + ':player-' + player.name);
-        //  socket.syncPlayerEvents('room-' + roomData._id + ':player-' + player.name, player, function (data) {
-        //    //console.log("event", event);
-        //    console.log("player:", data.name, data.direction);
-        //
-        //  });
-        //
-        //}
+
       });
     });
 
-    //socket.syncPlayerEvents('playerEvent',{room: $routeParams.roomID}, function (data) {
-    //  console.log("back from server:", data);
-    //  $scope.testEvent = data;
-    //});
-    //
-    //socket.socketIO('playerEvent', function (data) {
-    //  console.log("data", data);
-    //  $scope.testEvent = data.data;
-    //});
+    
 
 
   });

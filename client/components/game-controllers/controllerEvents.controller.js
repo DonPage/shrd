@@ -4,9 +4,17 @@ angular.module('shrdApp')
   .controller('ControllerEvents', function ($scope, Auth, $http, $routeParams, socket) {
     console.log("ControllerEvents");
 
-    $http.post('/api/rooms/' + $routeParams.roomID + '/' + Auth.getCurrentUser()._id, {name: Auth.getCurrentUser().name, active: false, _id: Auth.getCurrentUser()._id, direction: false})
+    var newPlayer = {
+      name: Auth.getCurrentUser().name,
+      _id: Auth.getCurrentUser()._id,
+      direction: false
+    };
+    console.log("newPlayer", newPlayer);
+
+    //creates new player in db.
+    $http.post('/api/rooms/' + $routeParams.roomID + '/' + Auth.getCurrentUser()._id, newPlayer)
       .success(function (data) {
-        console.log("newPlayer", data);
+        console.log("allPlayers", data);
     });
 
 

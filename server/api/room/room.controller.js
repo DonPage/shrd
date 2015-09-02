@@ -47,19 +47,32 @@ exports.createPlayer = function(req, res) {
     if (err) return handleError(res, err);
     if (!room) return res.status(404).send('Not Found');
 
-    //console.log("room.players", room.players);
+    var newPlayer = req.body;
     var allPlayers = room.players;
-    allPlayers.push(req.body);
 
-    var updated = _.merge(room.players, allPlayers);
-    room.players = updated;
-
-    //console.log("updated", updated);
-
-    room.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(room.players);
+    var find = _.findIndex(allPlayers, function(chr) {//This var fixes mutiple players.
+       return chr._id == newPlayer._id
     });
+
+    console.log("find", find);
+
+    if (find == -1) {//found nothing.
+      allPlayers.push(req.body);
+
+      var updated = _.merge(room.players, allPlayers);
+      room.players = updated;
+
+      console.log("updated", updated);
+
+      room.save(function (err) {
+        if (err) { return handleError(res, err); }
+        return res.status(200).json(room.players);
+      });
+    }
+
+
+
+
   });
 
   //Room.create(req.body, function(err, room) {
