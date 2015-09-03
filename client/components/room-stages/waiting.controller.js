@@ -19,19 +19,20 @@ angular.module('shrdApp')
       socket.waitingRoom('room-' + roomData._id, $scope.roomData, function (event, newData, obj) {
         $scope.roomData = newData;
 
-        for (var t = 0; t < newData.players.length; t++) {
-          var player = newData.players[t];
-          //sync room id with player id.
-          socket.syncPlayerEvents('room-' + $routeParams.roomID + ':player-' + player._id, player, function (data) {
-
-            var playerIdx = _.findIndex($scope.roomData.players, function(chr){
-              return chr._id == data._id;
-            });
-
-            $scope.roomData.players[playerIdx] = data;
-
-          })
-        }
+        //moved to testgame1
+        //for (var t = 0; t < newData.players.length; t++) {
+        //  var player = newData.players[t];
+        //  //sync room id with player id.
+        //  socket.syncPlayerEvents('room-' + $routeParams.roomID + ':player-' + player._id, player, function (data) {
+        //
+        //    var playerIdx = _.findIndex($scope.roomData.players, function(chr){
+        //      return chr._id == data._id;
+        //    });
+        //
+        //    $scope.roomData.players[playerIdx] = data;
+        //
+        //  })
+        //}
 
 
       });
