@@ -1,17 +1,22 @@
-<div class="col-md-12">
-<h1>{{ roomData.name }}</h1>
+
+<div class="col-md-12" ng-switch on="stage">
+
+  <div ng-switch-when="waitingRoom">
+    <div ng-include="'components/room-stages/waiting.html'" ng-controller="WaitRoomCtrl"></div>
+  </div>
+
+
+  <div ng-switch-when="start">
+    <h1>Start game stage</h1>
+  </div>
 
 
 
 
-  <qrcode size="284" data="{{ getWaitingRoomLink() }}" href="{{ getWaitingRoomLink() }}"></qrcode>
-  {{ getWaitingRoomLink() }}
 
-</div>
 
-<div>
-  <h1>players - {{ testEvent }}</h1>
-  <ul>
-    <li ng-repeat="player in roomData.players">{{ player.name }} - {{ player.active }} - {{ player.direction }}</li>
-  </ul>
-</div>
+
+
+</div> <!--Stage -->
+
+

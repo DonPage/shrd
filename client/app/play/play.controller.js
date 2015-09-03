@@ -5,7 +5,7 @@ angular.module('shrdApp')
     $scope.message = 'Hello';
 
     /**
-     * Test Room: http://localhost:9000/play/55e272e87ccd6cf02635f644
+     * Test Room:
      */
 
     /*

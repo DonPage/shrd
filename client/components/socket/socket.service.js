@@ -73,26 +73,38 @@ angular.module('shrdApp')
       },
 
 
+      /**
+       * Syncs [stageChange] for a room.
+       */
+      room: function (modelName, cb) {
+        cb = cb || angular.noop;
 
-      roomUpdates: function (modelName, obj, cb) {
+        //sending to server
+        socket.on(modelName + ':stageChange', function (newStage) {
+          cb(newStage)
+        })
+
+
+      },
+
+
+      waitingRoom: function(modelName, obj, cb) {
         //console.log("modelName", modelName);
         //console.log("obj", obj);
         cb = cb || angular.noop;
 
-
-
         /**
-         * Syncs item creation/updates on 'model:save'
+         * Syncs new players joining.
          */
-        socket.on(modelName + ':save', function (newData) {
+        socket.on(modelName + ':newPlayer', function (newData) {
           var event = 'created';
           //console.log("item", item);
           //console.log("obj", obj);
-
           cb(event, newData, obj);
         });
-
       },
+
+
 
       playerUpdates: function (modelName, obj, cb) {
         cb = cb || angular.noop;

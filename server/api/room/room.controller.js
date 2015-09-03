@@ -30,6 +30,10 @@ exports.show = function(req, res) {
 
 // Creates a new room in the DB.
 exports.create = function(req, res) {
+
+  req.body.inProgress = false;
+  req.body.stage = 'waitingRoom';
+
   Room.create(req.body, function(err, room) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(room);
@@ -63,6 +67,8 @@ exports.createPlayer = function(req, res) {
       room.players = updated;
 
       console.log("updated", updated);
+
+      room.latestAction = 'newPlayer';
 
       room.save(function (err) {
         if (err) { return handleError(res, err); }
