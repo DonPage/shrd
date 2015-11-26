@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var ShrdGame = require('../api/ShrdGame/ShrdGame.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -46,4 +47,14 @@ User.find({}).remove(function() {
       console.log('finished populating users');
     }
   );
+});
+
+ShrdGame.find({}).remove(function () {
+  ShrdGame.create({
+    name: 'Space Invaders',
+    info: 'Space Invaders Multiplayer Yo. This is a test game.',
+    version: '0.1',
+    maxPlayers: 5,
+    minPlayers: 2
+  })
 });

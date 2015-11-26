@@ -5,6 +5,12 @@ angular.module('shrdApp')
     $routeProvider
       .when('/createroom', {
         templateUrl: 'app/createroom/createroom.html',
-        controller: 'CreateroomCtrl'
+        controller: 'CreateroomCtrl',
+        resolve: {
+          games: function ($q, $http) {
+
+
+          }
+        }
       });
   });

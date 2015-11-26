@@ -26,6 +26,7 @@ function onConnect(socket) {
   require('../api/room/playRoom.socket').register(socket);
 
   // Insert sockets below
+  require('../api/ShrdGame/ShrdGame.socket').register(socket);
   require('../api/room/room.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 
