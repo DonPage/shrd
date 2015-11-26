@@ -7,8 +7,10 @@ angular.module('shrdApp')
         templateUrl: 'app/createroom/createroom.html',
         controller: 'CreateroomCtrl',
         resolve: {
-          games: function ($q, $http) {
 
+          games: function ($q, $http) {
+            return $http.get('/api/ShrdGames')
+              .then(function (games) { return games.data });
 
           }
         }

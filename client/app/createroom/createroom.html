@@ -19,23 +19,31 @@
       <!-- =============================================== -->
       <!-- RADIO BUTTONS -->
       <label>Choose Game:</label>
+      <!--<div class="form-group">-->
+        <!--<div class="radio">-->
+          <!--<label>-->
+            <!--<input type="radio" name="gameName" value="Misc Game 1" ng-model="formData.gameName">-->
+            <!--Misc Game 1-->
+          <!--</label>-->
+        <!--</div>-->
+        <!--<div class="radio">-->
+          <!--<label>-->
+            <!--<input type="radio" name="gameName" value="Random Game 2" ng-model="formData.gameName">-->
+            <!--Random Game 2-->
+          <!--</label>-->
+        <!--</div>-->
+        <!--<div class="radio">-->
+          <!--<label>-->
+            <!--<input type="radio" name="gameName" value="Test Game 3" ng-model="formData.gameName">-->
+            <!--Test Game 3-->
+          <!--</label>-->
+        <!--</div>-->
+      <!--</div>-->
       <div class="form-group">
         <div class="radio">
-          <label>
-            <input type="radio" name="gameName" value="Misc Game 1" ng-model="formData.gameName">
-            Misc Game 1
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="gameName" value="Random Game 2" ng-model="formData.gameName">
-            Random Game 2
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="gameName" value="Test Game 3" ng-model="formData.gameName">
-            Test Game 3
+          <label ng-repeat="game in games">
+            <input type="radio" name="{{ game.name }}" value="{{ game.name }}" ng-model="formData.shrdGame" />
+            {{ game.name }} ( min: {{ game.minPlayers }} max: {{ game.maxPlayers }} )
           </label>
         </div>
       </div>

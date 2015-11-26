@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('shrdApp')
-  .controller('CreateroomCtrl', function ($scope, $http, $location) {
+  .controller('CreateroomCtrl', function ($scope, $http, $location, games) {
+
+    $scope.games = games;
 
     $scope.formData = {
 
@@ -11,9 +13,9 @@ angular.module('shrdApp')
 
 
     $scope.submitRoom = function (data) {
-      console.log("data", data);
+      console.log("data:", data);
 
-      $http.post('/api/rooms', { name: data.name, game: data.gameName })
+      $http.post('/api/rooms', { name: data.name, game: data.shrdGame })
         .success(function (data) {
           console.log("data", data);
           console.log("$location", $location);
