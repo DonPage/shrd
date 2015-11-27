@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('shrdApp')
-  .controller('TestGameCtrl', function ($scope, $routeParams, $http, socket) {
+  .controller('SpaceInvadersCtrl', function ($scope, $routeParams, $http, socket) {
 
-    console.log("TestGameCtrl");
+    console.log("Space Invaders Controller");
 
     $scope.roomData = null;
 

@@ -9,7 +9,7 @@
   <div ng-switch-when="start">
     <h1>Start game stage</h1>
 
-    <div ng-include="'components/room-stages/testgame1.html'" ng-controller="TestGameCtrl"></div>
+    <div ng-if="(game == 'Space Invaders')" ng-include="'components/room-stages/SpaceInvaders.html'" ng-controller="SpaceInvadersCtrl"></div>
   </div>
 
 

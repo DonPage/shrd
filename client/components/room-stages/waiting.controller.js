@@ -19,6 +19,8 @@ angular.module('shrdApp')
       socket.waitingRoom('room-' + roomData._id, $scope.roomData, function (event, newData, obj) {
         $scope.roomData = newData;
 
+
+
         //moved to testgame1
         //for (var t = 0; t < newData.players.length; t++) {
         //  var player = newData.players[t];

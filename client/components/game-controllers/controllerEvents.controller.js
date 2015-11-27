@@ -7,7 +7,9 @@ angular.module('shrdApp')
     var newPlayer = {
       name: Auth.getCurrentUser().name,
       _id: Auth.getCurrentUser()._id,
-      direction: false
+      direction: null,
+      connection: true,
+      ready: false
     };
     console.log("newPlayer", newPlayer);
 
