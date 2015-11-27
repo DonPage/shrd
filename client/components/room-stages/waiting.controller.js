@@ -5,6 +5,8 @@ angular.module('shrdApp')
 
     console.log("WaitRoomCtrl");
 
+    console.log("$location:", $location);
+
 
     $scope.getWaitingRoomLink = function () { //This gets id from path and returns waiting room link.
       return $location.host() + ':' + $location.port() + '/play/' + $routeParams.roomID;

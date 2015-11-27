@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('shrdApp')
-  .controller('PlayCtrl', function ($scope, $http, socket, $routeParams, Auth, localStorage, $location, $window) {
-    $scope.message = 'Hello';
+  .controller('PlayCtrl', function ($scope, $http, socket, $routeParams, Auth, localStorage, $location, roomData) {
+    console.log("roomData1111:", roomData);
+
 
     /**
      * Test Room:
@@ -22,7 +23,6 @@ angular.module('shrdApp')
         $scope.initController(Auth.getCurrentUser());
 
       } else { //if false
-        console.log("user not logged in.");
 
         $scope.stage = 'login';
 
@@ -35,10 +35,8 @@ angular.module('shrdApp')
           }
 
           else if (choice == 'guess') {
-            console.log("choice", choice);
 
             Auth.createGuest(function (guest) {
-              console.log("guest", guest);
               $scope.initController(Auth.getCurrentUser())
             })
 
@@ -51,7 +49,6 @@ angular.module('shrdApp')
     });//isLoggedInAsync();
 
     $scope.initController = function (user) {
-      console.log("initController", user);
       if (!user) return false;
 
       //delete any redirects:
