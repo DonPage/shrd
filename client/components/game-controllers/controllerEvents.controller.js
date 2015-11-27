@@ -7,6 +7,7 @@ angular.module('shrdApp')
     var newPlayer = {
       name: Auth.getCurrentUser().name,
       _id: Auth.getCurrentUser()._id,
+      room: $routeParams.roomID,
       direction: null,
       connection: true,
       ready: false
@@ -20,28 +21,20 @@ angular.module('shrdApp')
     });
 
 
+    $scope.start = function () {
+      console.log("start");
+    };
 
     $scope.direction = function (event) {
-      var obj = {
-        name: Auth.getCurrentUser().name,
-        direction: event.target.id,
-        room: $routeParams.roomID,
-        _id: Auth.getCurrentUser()._id
-      };
-      console.log("obj", obj);
-      socket.playerUpdates('playerUpdate', obj)
+      newPlayer.direction = event.target.id;
+
+      socket.playerUpdates('playerUpdate', newPlayer)
     };
 
     $scope.endDirection = function (end) {
-      console.log("end.target.id", end.target.id);
-      var obj = {
-        name: Auth.getCurrentUser().name,
-        direction: false,
-        room: $routeParams.roomID,
-        _id: Auth.getCurrentUser()._id
-      };
+      newPlayer.direction = false;
 
-      socket.playerUpdates('playerUpdate', obj)
+      socket.playerUpdates('playerUpdate', newPlayer)
     };
 
 
