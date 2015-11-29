@@ -18,9 +18,11 @@ angular.module('shrdApp')
     $http.get('/api/rooms/' + $routeParams.roomID).success(function (roomData) {
       console.log("roomData: ", roomData);
       $scope.roomData = roomData;
+      socketPlayerEvents($scope.roomData.players);
+
       socket.waitingRoom('room-' + roomData._id, $scope.roomData, function (event, newData, obj) {
         $scope.roomData = newData;
-
+        socketPlayerEvents($scope.roomData.players);
 
 
         //moved to testgame1
@@ -55,6 +57,20 @@ angular.module('shrdApp')
 
       $http.put('/api/rooms/' + $routeParams.roomID, $scope.roomData).success(function (roomData) {
         console.log("roomData", roomData);
+      })
+    };
+
+    function socketPlayerEvents(players) {
+      players.forEach(function (p) {
+        socket.syncPlayerEvents('room-' + $routeParams.roomID + ':player-' + p._id, p, function (data) {
+
+          var playerIdx = _.findIndex($scope.roomData.players, function (chr) {
+            return chr._id == data._id;
+          });
+
+          $scope.roomData.players[playerIdx] = data;
+
+        })
       })
     }
 

@@ -21,7 +21,7 @@ angular.module('shrdApp')
     });
 
 
-    $scope.start = function () {
+    $scope.startButton = function () {
       Player.ready = !Player.ready;
       console.log("Player.ready:", Player.ready);
 
