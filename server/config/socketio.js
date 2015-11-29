@@ -8,6 +8,9 @@ var config = require('./environment');
 
 // When the user disconnects.. perform this
 function onDisconnect(socket) {
+  var refererRoom = socket.handshake.headers.referer;
+
+  console.log("Socket Disconnect:", socket.conn.server);
 }
 
 // When the user connects.. perform this
