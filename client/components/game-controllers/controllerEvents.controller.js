@@ -4,7 +4,7 @@ angular.module('shrdApp')
   .controller('ControllerEvents', function ($scope, Auth, $http, $routeParams, socket) {
     console.log("ControllerEvents");
 
-    var newPlayer = {
+    var Player = {
       name: Auth.getCurrentUser().name,
       _id: Auth.getCurrentUser()._id,
       room: $routeParams.roomID,
@@ -12,29 +12,32 @@ angular.module('shrdApp')
       connection: true,
       ready: false
     };
-    console.log("newPlayer", newPlayer);
+    console.log("Player", Player);
 
     //creates new player in db.
-    $http.post('/api/rooms/' + $routeParams.roomID + '/' + Auth.getCurrentUser()._id, newPlayer)
+    $http.post('/api/rooms/' + $routeParams.roomID + '/' + Auth.getCurrentUser()._id, Player)
       .success(function (data) {
         console.log("allPlayers", data);
     });
 
 
     $scope.start = function () {
-      console.log("start");
+      Player.ready = !Player.ready;
+      console.log("Player.ready:", Player.ready);
+
+      socket.playerUpdates('playerUpdate', Player);
     };
 
     $scope.direction = function (event) {
-      newPlayer.direction = event.target.id;
+      Player.direction = event.target.id;
 
-      socket.playerUpdates('playerUpdate', newPlayer)
+      socket.playerUpdates('playerUpdate', Player)
     };
 
     $scope.endDirection = function (end) {
-      newPlayer.direction = false;
+      Player.direction = false;
 
-      socket.playerUpdates('playerUpdate', newPlayer)
+      socket.playerUpdates('playerUpdate', Player)
     };
 
 
