@@ -7,3 +7,6 @@ client/bower_components
 dist
 /server/config/local.env.js
 npm-debug.log
+
+/server/api/thing
+/client/app/main/main.controller.old.js
