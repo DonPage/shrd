@@ -1,25 +1,16 @@
 'use strict';
 
-angular.module('shrdApp')
-  .controller('RoomCtrl', function ($scope, $location, $routeParams, $http, socket) {
+(function() {
 
-    console.log("RoomCtrl");
+  class RoomController {
 
+    constructor($scope) {
 
+    }
 
-    //We must get data of room so we know what stage to switch to.
-    $http.get('/api/rooms/' + $routeParams.roomID).success(function (roomData) {
-      $scope.game = roomData.game;
+  }
 
+  angular.module('shrd2App')
+    .controller('RoomController', RoomController);
 
-
-      $scope.stage = roomData.stage;
-
-      socket.room('room-' + $routeParams.roomID, function (newStage) {
-        $scope.stage = newStage;
-      })
-
-
-    });
-
-  });
+})();

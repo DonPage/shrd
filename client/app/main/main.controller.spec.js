@@ -1,29 +1,29 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: MainController', function() {
 
   // load the controller's module
-  beforeEach(module('shrdApp'));
+  beforeEach(module('shrd2App'));
   beforeEach(module('socketMock'));
 
-  var MainCtrl,
-      scope,
-      $httpBackend;
+  var scope;
+  var MainController;
+  var $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
+  beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('/api/things')
       .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    MainController = $controller('MainController', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of things to the scope', function () {
+  it('should attach a list of things to the controller', function() {
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+    expect(MainController.awesomeThings.length).toBe(4);
   });
 });

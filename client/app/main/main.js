@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('shrdApp')
-  .config(function ($routeProvider) {
+angular.module('shrd2App')
+  .config(function($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainController',
+        controllerAs: 'main'
       });
   });

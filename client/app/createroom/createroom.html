@@ -1,5 +1,4 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
+<navbar></navbar>
 <div class="col-md-12">
   <!--This is the createroom view. {{ message }}-->
 
@@ -8,41 +7,41 @@
 
     <h2>Create Room</h2>
 
-    <form ng-submit="submitRoom(formData)">
+    <form ng-submit="cr.submitRoom()">
 
       <!-- NAME INPUT -->
       <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" name="name" ng-model="formData.name" minlength="1">
+        <input type="text" class="form-control" name="name" ng-model="cr.forumData.name" minlength="1">
       </div>
 
       <!-- =============================================== -->
       <!-- RADIO BUTTONS -->
       <label>Choose Game:</label>
       <!--<div class="form-group">-->
-        <!--<div class="radio">-->
-          <!--<label>-->
-            <!--<input type="radio" name="gameName" value="Misc Game 1" ng-model="formData.gameName">-->
-            <!--Misc Game 1-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="radio">-->
-          <!--<label>-->
-            <!--<input type="radio" name="gameName" value="Random Game 2" ng-model="formData.gameName">-->
-            <!--Random Game 2-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="radio">-->
-          <!--<label>-->
-            <!--<input type="radio" name="gameName" value="Test Game 3" ng-model="formData.gameName">-->
-            <!--Test Game 3-->
-          <!--</label>-->
-        <!--</div>-->
+      <!--<div class="radio">-->
+      <!--<label>-->
+      <!--<input type="radio" name="gameName" value="Misc Game 1" ng-model="formData.gameName">-->
+      <!--Misc Game 1-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--<div class="radio">-->
+      <!--<label>-->
+      <!--<input type="radio" name="gameName" value="Random Game 2" ng-model="formData.gameName">-->
+      <!--Random Game 2-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--<div class="radio">-->
+      <!--<label>-->
+      <!--<input type="radio" name="gameName" value="Test Game 3" ng-model="formData.gameName">-->
+      <!--Test Game 3-->
+      <!--</label>-->
+      <!--</div>-->
       <!--</div>-->
       <div class="form-group">
         <div class="radio">
-          <label ng-repeat="game in games">
-            <input type="radio" name="{{ game.name }}" value="{{ game.name }}" ng-model="formData.shrdGame" />
+          <label ng-repeat="game in cr.games">
+            <input type="radio" name="{{ game.name }}" value="{{ game.name }}" ng-model="cr.forumData.shrdGame" />
             {{ game.name }} ( min: {{ game.minPlayers }} max: {{ game.maxPlayers }} )
           </label>
         </div>

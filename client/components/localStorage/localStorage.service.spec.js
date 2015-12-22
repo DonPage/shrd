@@ -3,7 +3,7 @@
 describe('Service: localStorage', function () {
 
   // load the service's module
-  beforeEach(module('shrdApp'));
+  beforeEach(module('shrd2App'));
 
   // instantiate service
   var localStorage;

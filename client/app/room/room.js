@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('shrdApp')
+angular.module('shrd2App')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/room/:roomID', {
+      .when('/room/:roomId', {
         templateUrl: 'app/room/room.html',
-        controller: 'RoomCtrl'
-      })
+        controller: 'RoomController',
+        controllerAs: 'room'
+      });
   });

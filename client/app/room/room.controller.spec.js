@@ -3,7 +3,7 @@
 describe('Controller: RoomCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('shrdApp'));
+  beforeEach(module('shrd2App'));
 
   var RoomCtrl, scope;
 

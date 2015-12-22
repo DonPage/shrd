@@ -1,18 +1,12 @@
 'use strict';
 
-angular.module('shrdApp')
+angular.module('shrd2App')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/createroom', {
-        templateUrl: 'app/createroom/createroom.html',
-        controller: 'CreateroomCtrl',
-        resolve: {
-
-          games: function ($q, $http) {
-            return $http.get('/api/ShrdGames')
-              .then(function (games) { return games.data });
-
-          }
-        }
+      .when('/create-room', {
+        templateUrl: 'app/createRoom/createRoom.html',
+        controller: 'CreateRoomController',
+        controllerAs: 'cr',
+        authenticate: true
       });
   });

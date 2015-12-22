@@ -1,29 +1,32 @@
 'use strict';
 
-angular.module('shrdApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [
-      {
+class NavbarController {
+  //start-non-standard
+  menu = [
+    {
       'title': 'Home',
       'link': '/'
-      },
-      {
-        'title': 'Hotjoin',
-        'link': '/hotjoin'
-      }
-    ];
+    },
+    {
+      'title': 'Hot-join',
+      'link': '/hotjoin'
+    }
+  ];
 
-    $scope.isCollapsed = true;
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+  isCollapsed = true;
+  //end-non-standard
 
-    $scope.logout = function() {
-      Auth.logout();
-      $location.path('/login');
-    };
+  constructor($location, Auth) {
+    this.$location = $location;
+    this.isLoggedIn = Auth.isLoggedIn;
+    this.isAdmin = Auth.isAdmin;
+    this.getCurrentUser = Auth.getCurrentUser;
+  }
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
-  });
+  isActive(route) {
+    return route === this.$location.path();
+  }
+}
+
+angular.module('shrd2App')
+  .controller('NavbarController', NavbarController);

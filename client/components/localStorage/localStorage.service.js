@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('shrdApp')
+angular.module('shrd2App')
   .service('localStorage', function () {
 
 

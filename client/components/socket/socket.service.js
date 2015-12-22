@@ -1,9 +1,8 @@
 /* global io */
 'use strict';
 
-angular.module('shrdApp')
+angular.module('shrd2App')
   .factory('socket', function(socketFactory) {
-
     // socket.io now auto-configures its connection when we ommit a connection url
     var ioSocket = io('', {
       // Send auth token on connection, you will need to DI the Auth service above
@@ -11,23 +10,10 @@ angular.module('shrdApp')
       path: '/socket.io-client'
     });
 
-    var socket = socketFactory({
-      ioSocket: ioSocket
-    });
+    var socket = socketFactory({ ioSocket });
 
     return {
-      socketIO: function (name,cb) {
-        console.log("socketIO", name, cb);
-        cb = cb || angular.noop;
-
-        socket.on(name, function (data) {
-          console.log("socket callback");
-          cb(data)
-        })
-
-      },
-
-      socket: socket,
+      socket,
 
       /**
        * Register listeners to sync an array with updates on a model
@@ -39,7 +25,7 @@ angular.module('shrdApp')
        * @param {Array} array
        * @param {Function} cb
        */
-      syncUpdates: function (modelName, array, cb) {
+      syncUpdates(modelName, array, cb) {
         cb = cb || angular.noop;
 
         /**
@@ -72,67 +58,12 @@ angular.module('shrdApp')
         });
       },
 
-
-      /**
-       * Syncs [stageChange] for a room.
-       */
-      room: function (modelName, cb) {
-        cb = cb || angular.noop;
-
-        //sending to server
-        socket.on(modelName + ':stageChange', function (newStage) {
-          cb(newStage)
-        })
-
-
-      },
-
-
-      waitingRoom: function(modelName, obj, cb) {
-        //console.log("modelName", modelName);
-        //console.log("obj", obj);
-        cb = cb || angular.noop;
-
-        /**
-         * Syncs new players joining.
-         */
-        socket.on(modelName + ':newPlayer', function (newData) {
-          var event = 'created';
-          //console.log("item", item);
-          //console.log("obj", obj);
-          cb(event, newData, obj);
-        });
-
-      },
-
-
-
-      playerUpdates: function (modelName, obj, cb) {
-        cb = cb || angular.noop;
-
-        //sending to server
-        socket.emit('playerUpdate', obj);
-
-
-      },
-
-      syncPlayerEvents: function (modelName, obj, cb) {
-        console.log("syncPlayerEvents:", modelName);
-        cb = cb || angular.noop;
-
-        socket.on(modelName, function (data) {
-          //console.log("back from server:", data);
-          cb(data);
-        })
-
-      },
-
       /**
        * Removes listeners for a models updates on the socket
        *
        * @param modelName
        */
-      unsyncUpdates: function (modelName) {
+      unsyncUpdates(modelName) {
         socket.removeAllListeners(modelName + ':save');
         socket.removeAllListeners(modelName + ':remove');
       }

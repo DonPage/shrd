@@ -1,9 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
-var RoomSchema = new Schema({
+var RoomSchema = new mongoose.Schema({
   name: String,
   game: String,
   players: Array,
@@ -12,4 +11,4 @@ var RoomSchema = new Schema({
   latestAction: String
 });
 
-module.exports = mongoose.model('Room', RoomSchema);
+export default mongoose.model('Room', RoomSchema);

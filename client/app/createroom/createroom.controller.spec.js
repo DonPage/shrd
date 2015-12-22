@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: CreateroomCtrl', function () {
+describe('Controller: CreateRoomCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('shrdApp'));
+  beforeEach(module('shrd2App'));
 
-  var CreateroomCtrl, scope;
+  var CreateRoomCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    CreateroomCtrl = $controller('CreateroomCtrl', {
+    CreateRoomCtrl = $controller('CreateRoomCtrl', {
       $scope: scope
     });
   }));

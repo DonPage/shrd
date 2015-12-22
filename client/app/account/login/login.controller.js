@@ -1,39 +1,35 @@
 'use strict';
 
-angular.module('shrdApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window, localStorage) {
-    $scope.user = {};
-    $scope.errors = {};
+class LoginController {
+  //start-non-standard
+  user = {};
+  errors = {};
+  submitted = false;
+  //end-non-standard
 
-    $scope.login = function (form) {
-      $scope.submitted = true;
+  constructor(Auth, $location) {
+    this.Auth = Auth;
+    this.$location = $location;
+  }
 
-      if (form.$valid) {
-        Auth.login({
-          email: $scope.user.email,
-          password: $scope.user.password
-        })
-          .then(function () {
-            // See if user has a redirect in local storage, if not then redirect them to home.
-            localStorage.read('redirect', function (value) {
+  login(form) {
+    this.submitted = true;
 
-              if (!value) {
-                $location.path('/');
-              }
+    if (form.$valid) {
+      this.Auth.login({
+        email: this.user.email,
+        password: this.user.password
+      })
+      .then(() => {
+        // Logged in, redirect to home
+        this.$location.path('/');
+      })
+      .catch(err => {
+        this.errors.other = err.message;
+      });
+    }
+  }
+}
 
-              $location.path(value);
-
-            });
-
-            //$location.path('/');
-          })
-          .catch(function (err) {
-            $scope.errors.other = err.message;
-          });
-      }
-    };
-
-    $scope.loginOauth = function (provider) {
-      $window.location.href = '/auth/' + provider;
-    };
-  });
+angular.module('shrd2App')
+  .controller('LoginController', LoginController);

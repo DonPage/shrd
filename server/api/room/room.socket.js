@@ -4,40 +4,31 @@
 
 'use strict';
 
-var Room = require('./room.model');
+var RoomEvents = require('./room.events');
 
-exports.register = function(socket) {
-  Room.schema.post('save', function (doc) {
-    console.log("ROOM SAVE");
-    onSave(socket, doc);
-  });
+// Model events to emit
+var events = ['save', 'remove'];
 
-  //Room.schema.post('update', function (doc) {
-  //  console.log("ROOM UPDATE");
-  //
-  //});
+export function register(socket) {
+  // Bind model events to socket events
+  for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
+    var event = events[i];
+    var listener = createListener('room:' + event, socket);
 
-  Room.schema.post('remove', function (doc) {
-    onRemove(socket, doc);
-  });
-};
-
-function onSave(socket, doc, cb) {
-  console.log("doc.latestAction", doc.latestAction);
-
-  //different latestAction have specific sockets it needs to broadcast to.
-
-  switch(doc.latestAction) {
-    case 'newPlayer':
-          socket.emit('room-' + doc._id + ':newPlayer', doc);
-          break;
-    case 'stageChange':
-          socket.emit('room-' + doc._id + ':stageChange', doc.stage)
+    RoomEvents.on(event, listener);
+    socket.on('disconnect', removeListener(event, listener));
   }
-
-  //socket.emit('room-' + doc._id+':' + doc.latestAction, doc);
 }
 
-function onRemove(socket, doc, cb) {
-  socket.emit('room:remove', doc);
+
+function createListener(event, socket) {
+  return function(doc) {
+    socket.emit(event, doc);
+  };
+}
+
+function removeListener(event, listener) {
+  return function() {
+    RoomEvents.removeListener(event, listener);
+  };
 }

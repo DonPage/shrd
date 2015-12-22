@@ -1,27 +1,36 @@
 'use strict';
 
-angular.module('shrdApp')
-  .controller('CreateroomCtrl', function ($scope, $http, $location, games) {
+(function(){
 
-    $scope.games = games;
+class CreateRoomController {
 
-    $scope.formData = {
+  constructor($http, $location) {
+    this.$http = $http;
+    this.$location = $location;
+    this.forumData = {};
+    this.games = [
+      {
+        name: 'Cards Against Humanity',
+        minPlayers: 3,
+        maxPlayers: 20
+      }
+    ];
+  }
 
-    };
-
-
-
-
-    $scope.submitRoom = function (data) {
-      console.log("data:", data);
-
-      $http.post('/api/rooms', { name: data.name, game: data.shrdGame })
-        .success(function (data) {
-          console.log("data", data);
-          console.log("$location", $location);
-          $location.path('/room/'+data._id);
-
-        });
-
+  submitRoom() {
+    if (this.forumData.name && this.forumData.shrdGame) {
+      this.$http.post('/api/rooms', {name: this.forumData.name, game: this.forumData.shrdGame})
+        .then(result => this.$location.path(`/room/${result.data._id}`))
+        .catch(result => console.log("ERROR:", result))
     }
-  });
+  }
+
+
+}
+
+angular.module('shrd2App')
+  .controller('CreateRoomController', CreateRoomController)
+
+})();
+
+
