@@ -1,3 +1,16 @@
 <navbar></navbar>
-<div>This is the hotjoin view.</div>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table">
+
+      <!-- On cells (`td` or `th`) -->
+      <tr ng-repeat="room in hj.rooms">
+        <td>{{ room.name }}</td>
+        <td>{{ room.game }}</td>
+        <td>{{ room.players.length }}</td>
+        <td> <button type="button" class="btn btn-default btn-sm" ng-click="hj.join(room._id)">Join</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
 <footer></footer>
