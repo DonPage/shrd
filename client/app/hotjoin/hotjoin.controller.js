@@ -4,8 +4,10 @@
 
   class HotJoinController {
 
-    constructor($scope) {
-
+    constructor($http) {
+      this.games = [];
+      $http.get('/api/rooms/hotjoin')
+        .then(results => this.games = results.data)
     }
 
   }

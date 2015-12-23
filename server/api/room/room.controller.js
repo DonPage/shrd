@@ -1,6 +1,7 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/rooms              ->  index
+ * GET     /api/rooms/hotjoin      ->  index
  * POST    /api/rooms              ->  create
  * GET     /api/rooms/:id          ->  show
  * PUT     /api/rooms/:id          ->  update
@@ -19,9 +20,9 @@ function handleError(res, statusCode) {
   };
 }
 
-function responseWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
+function responseWithResult(res, statusCode=200) {
   return function(entity) {
+    console.log("entity", entity);
     if (entity) {
       res.status(statusCode).json(entity);
     }
@@ -64,6 +65,13 @@ export function index(req, res) {
   Room.findAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
+}
+
+// Gets a list of 'joinable' Rooms
+export function indexHotjoin(req, res) {
+  Room.findAsync({inProgress: false})
+    .then(responseWithResult(res))
+    .catch(handleError(res))
 }
 
 // Gets a single Room from the DB
