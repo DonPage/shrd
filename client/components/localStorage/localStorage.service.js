@@ -1,63 +1,52 @@
 'use strict';
 
-angular.module('shrd2App')
-  .service('localStorage', function () {
+(function() {
 
+  /**
+   * Reusable functions for Local Storage
+   */
+  function LocStorageService(Util) {
+    var LocalStorage = {
 
-    /**
-     * CRUD for LocalStorage.
-     * Create
-     * Read
-     * Update
-     * Delete
-     */
-
-    function stringy(value) {
-      return JSON.stringify(value);
-    }
-
-    return {
-
-      create: function (key, value) {
-        console.log("localStorage create:", key);
-
-        if (typeof value == 'string') {
-          return localStorage.setItem(key, value);
-        } else {
-          return localStorage.setItem(key, stringy(value));
+        /**
+         * Create key with value
+         * @param {String}  key
+         * @param {String}  value
+         * @return {Function} callback
+         */
+        create: function (key, value, cb) {
+          let cb = Util.safeCb(cb)
         }
 
-      },
-
-      read: function (key, cb) {
-        cb = cb || angular.noop;
-        console.log("localStorage read:", key);
-
-        var value = localStorage.getItem(key);
-
-        if (!value) {
-          cb(false)
-        } else {
-          cb(value);
-        }
-      },
-
-      update: function (key, value) {
-        console.log("localStorage update:", key);
-
-        var oldValue = localStorage.getItem(key);
-
-        if (oldValue) {
-          return localStorage.setItem(key, value);
-        }
-
-      },
 
 
-      delete: function (key) {
-        console.log("localStorage delete:", key);
-        localStorage.removeItem(key);
-      }
+        /**
+         * Read value at key
+         * @param {String} key
+         * @param {String} value
+         * @return {Function|Boolean} callback - false when no value is found
+         */
 
-    }
-  });
+        /**
+         * Update key with value
+         * @param {String} key
+         * @param {String} value
+         * @return {Function|Boolean} callback - false when no key is found
+         */
+
+        /**
+         * Delete key and value
+         * @param {String}  key
+         * @param {Function}  callback
+         */
+
+
+    };
+
+    return LocalStorage;
+  }
+
+  angular.module('shrd2App.locStorage')
+    .factory('LocStorage', LocStorageService);
+
+})();
