@@ -5,7 +5,6 @@
   class PlayController {
 
     constructor(mobileCheck) {
-      console.log("mobileCheck", mobileCheck);
 
     }
 

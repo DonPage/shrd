@@ -11,7 +11,7 @@ angular.module('shrd2App', [
   'btford.socket-io',
   'ui.bootstrap',
   'validation.match',
-  'monospaced.qrcode'
+  'monospaced.qrcode',
 ])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider

@@ -6,6 +6,8 @@
    * Reusable functions for Local Storage
    */
   function LocStorageService(Util) {
+    var safeCb = Util.safeCb;
+
     var LocalStorage = {
 
         /**
@@ -14,8 +16,15 @@
          * @param {String}  value
          * @return {Function} callback
          */
-        create: function (key, value, cb) {
-          let cb = Util.safeCb(cb)
+      create(key, value, callback) {
+          if (typeof value === 'string') {
+            localStorage.setItem(key, value)
+          } else {
+            localStorage.setItem(key, JSON.stringify(value));
+          }
+
+
+
         }
 
 
@@ -46,7 +55,7 @@
     return LocalStorage;
   }
 
-  angular.module('shrd2App.locStorage')
+  angular.module('shrd2App')
     .factory('LocStorage', LocStorageService);
 
 })();
