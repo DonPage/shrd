@@ -4,7 +4,8 @@
 
   class PlayController {
 
-    constructor($scope) {
+    constructor(mobileCheck) {
+      console.log("mobileCheck", mobileCheck);
 
     }
 
