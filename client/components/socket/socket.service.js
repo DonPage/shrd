@@ -16,6 +16,37 @@ angular.module('shrd2App')
       socket,
 
       /**
+       * Register listeners to sync room updates
+       *
+       * @param {String} id - room id
+       * @param {Object} obj - Object
+       * @param {Function} callback
+       */
+
+      roomUpdates(id, obj, callback) {
+        callback = callback || angular.noop;
+
+        socket.on(`${id}:newPlayer`, (res) => {
+
+        });
+
+        socket.on(`${id}:removePlayer`, (res) => {
+
+        });
+
+        socket.on(`${id}:playerEvent`, (res) => {
+
+        });
+
+        socket.on(`${id}:beginGame`, (res) => {
+
+        });
+
+      },
+
+
+
+      /**
        * Register listeners to sync an array with updates on a model
        *
        * Takes the array we want to sync, the model name that socket updates are sent from,
@@ -25,6 +56,8 @@ angular.module('shrd2App')
        * @param {Array} array
        * @param {Function} cb
        */
+
+
       syncUpdates(modelName, array, cb) {
         cb = cb || angular.noop;
 

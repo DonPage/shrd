@@ -4,7 +4,7 @@
 
   class PlayController {
 
-    constructor(mobileCheck) {
+    constructor(mobileCheck, Auth) {
 
     }
 
