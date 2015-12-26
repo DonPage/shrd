@@ -17,7 +17,11 @@ angular.module('shrd2App')
             let check = Auth.isLoggedIn();
             if (!check) {
               console.log('not logged in.');
-              LocStorage.create('redirect', $location.path(), () => console.log("redirect created"))
+              LocStorage.create('redirect', $location.path(), (res) => {
+                if (res) {
+                  $location.path('/login');
+                }
+              })
             } else {
 
             }
