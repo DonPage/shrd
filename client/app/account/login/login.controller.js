@@ -7,9 +7,10 @@ class LoginController {
   submitted = false;
   //end-non-standard
 
-  constructor(Auth, $location) {
+  constructor(Auth, $location, LocStorage) {
     this.Auth = Auth;
     this.$location = $location;
+    this.LocStorage = LocStorage;
   }
 
   login(form) {
@@ -21,8 +22,11 @@ class LoginController {
         password: this.user.password
       })
       .then(() => {
-        // Logged in, redirect to home
-        this.$location.path('/');
+        // Logged in, read any redirect or go to home.
+        this.LocStorage.read('redirect', (res) => {
+          res ? this.$location.path(res) : this.$location.path('/');
+          if (res) this.LocStorage.delete('redirect');
+        });
       })
       .catch(err => {
         this.errors.other = err.message;
