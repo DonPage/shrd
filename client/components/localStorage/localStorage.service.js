@@ -19,15 +19,8 @@
          * @return {Function} callback
          */
       create(key, value, callback) {
-          if (findKey(key)) { return safeCb(callback)(false); }
-
-          if (angular.isString(value)) {
-            localStorage.setItem(key, value);
-          } else {
-            localStorage.setItem(key, JSON.stringify(value));
-          }
-
-          return safeCb(callback)();
+          angular.isString(value) ? localStorage.setItem(key, value) : localStorage.setItem(key, JSON.stringify(value));
+          return safeCb(callback)(true);
         },
 
 
