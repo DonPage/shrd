@@ -14,17 +14,17 @@ angular.module('shrd2App')
             return check;
           },
           loginCheck: function (Auth, $location, LocStorage) {
-            let check = Auth.isLoggedIn();
-            if (!check) {
-              console.log('not logged in.');
-              LocStorage.create('redirect', $location.path(), (res) => {
-                if (res) {
-                  $location.path('/login');
-                }
-              })
-            } else {
-
-            }
+            Auth.isLoggedIn(res => {
+              if (!res)
+                return LocStorage.create('redirect', $location.path(), () => $location.path('/login'));
+              return res;
+            });
+            //if (!check) {
+            //  console.log('not logged in.');
+            //  LocStorage.create('redirect', $location.path(), (res) => {
+            //    if (res) $location.path('/login');
+            //  })
+            //}
           }
         }
       });
