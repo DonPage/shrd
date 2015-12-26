@@ -2,7 +2,7 @@
 
 (function() {
 
-  class PlayController {
+  class ScreenController {
 
     constructor(mobileCheck, $routeParams, $http) {
       this.isMobile = mobileCheck;
@@ -23,6 +23,6 @@
   }
 
   angular.module('shrd2App')
-    .controller('PlayController', PlayController);
+    .controller('ScreenController', ScreenController);
 
 })();
