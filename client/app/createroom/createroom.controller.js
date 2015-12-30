@@ -20,7 +20,7 @@ class CreateRoomController {
   submitRoom() {
     if (this.forumData.name && this.forumData.shrdGame) {
       this.$http.post('/api/rooms', {name: this.forumData.name, game: this.forumData.shrdGame})
-        .then(result => this.$location.path(`/room/${result.data._id}`))
+        .then(result => this.$location.path(`/screen/${result.data._id}`))
         .catch(result => console.log("ERROR:", result))
     }
   }
