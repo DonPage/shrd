@@ -23,7 +23,7 @@ angular.module('shrd2App')
        * @param {Function} callback
        */
 
-      roomUpdates(id, obj, callback) {
+      syncRoomUpdates(id, obj, callback) {
         callback = callback || angular.noop;
 
         socket.on(`${id}:newPlayer`, (res) => {
