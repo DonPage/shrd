@@ -60,6 +60,15 @@ function removeEntity(res) {
   };
 }
 
+function addPlayer(room) {
+  return function(entity) {
+    let roomPlayers = room.players;
+    let newPlayer = entity;
+    console.log(`roomPlayers  ${roomPlayers}`);
+    console.log(`newPlayer  ${newPlayer}`);
+  }
+}
+
 // Gets a list of Rooms
 export function index(req, res) {
   Room.findAsync()
@@ -111,4 +120,14 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+// Adds new player to Room
+export function newPlayer(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Room.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then
 }
