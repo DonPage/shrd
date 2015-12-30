@@ -4,8 +4,7 @@
 
   class ScreenController {
 
-    constructor(mobileCheck, $routeParams, $http) {
-      this.isMobile = mobileCheck;
+    constructor(Auth, $routeParams, $http) {
       this.$roomId = $routeParams.roomId;
       this.roomData = {};
 

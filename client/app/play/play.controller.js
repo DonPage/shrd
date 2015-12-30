@@ -4,8 +4,7 @@
 
   class PlayController {
 
-    constructor(mobileCheck, $routeParams, $http) {
-      this.isMobile = mobileCheck;
+    constructor($routeParams, $http) {
       this.$roomId = $routeParams.roomId;
       this.roomData = {};
 
@@ -17,7 +16,7 @@
         })
         .catch(res => {
           //TODO: show an error
-        })
+        });
 
     }
 
