@@ -7,6 +7,7 @@
     constructor($routeParams, $http) {
       this.$roomId = $routeParams.roomId;
       this.roomData = {};
+      this.ready = false;
 
       $http.get(`/api/rooms/${this.$roomId}`)
         .then(res => {
@@ -18,6 +19,11 @@
           //TODO: show an error
         });
 
+    }
+
+    readyUp() {
+      console.log("ready up");
+      this.ready = !this.ready;
     }
 
   }

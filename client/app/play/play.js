@@ -6,7 +6,7 @@ angular.module('shrd2App')
       .when('/play/:roomId', {
         templateUrl: 'app/play/play.html',
         controller: 'PlayController',
-        controllerAs: 'play',
+        controllerAs: 'player',
         resolve: {
           loggedIn(Auth, LocStorage, $location) {
             Auth.isLoggedIn(res => {
