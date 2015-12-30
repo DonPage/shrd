@@ -1,1 +1,8 @@
 <div>This is the play view.</div>
+
+<div ng-switch="play.roomData.game">
+  <div ng-switch-default> Default: {{ play.roomData.game }}</div>
+  <div ng-switch-when="Cards Against Humanity">
+    <cahcontroller></cahcontroller>
+  </div>
+</div>

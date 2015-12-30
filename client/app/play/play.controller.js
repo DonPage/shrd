@@ -12,6 +12,7 @@
       $http.get(`/api/rooms/${this.$roomId}`)
         .then(res => {
           this.roomData = res.data;
+          console.log(this.roomData.game)
 
         })
         .catch(res => {
