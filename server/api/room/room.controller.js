@@ -11,7 +11,7 @@
 'use strict';
 
 import _ from 'lodash';
-var Room = require('./room.model');
+import Room from './room.model'
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -22,7 +22,6 @@ function handleError(res, statusCode) {
 
 function responseWithResult(res, statusCode=200) {
   return function(entity) {
-    console.log("entity", entity);
     if (entity) {
       res.status(statusCode).json(entity);
     }
@@ -58,15 +57,6 @@ function removeEntity(res) {
         });
     }
   };
-}
-
-function addPlayer(room) {
-  return function(entity) {
-    let roomPlayers = room.players;
-    let newPlayer = entity;
-    console.log(`roomPlayers  ${roomPlayers}`);
-    console.log(`newPlayer  ${newPlayer}`);
-  }
 }
 
 // Gets a list of Rooms
@@ -122,12 +112,15 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
-// Adds new player to Room
-export function newPlayer(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  Room.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then
+export function addUser(roomId, user, res) {
+  Room.findByIdAsync(roomId)
+    .then(roomData => {
+      //TODO: make a failsafe for if the user is already in room.
+      var currentPlayers = roomData.players;
+      currentPlayers.push(user);
+      roomData.players = currentPlayers;
+      return roomData.saveAsync()
+        .then(() => res.status(204).end())
+        .catch(() => res.status(422).end())
+    })
 }

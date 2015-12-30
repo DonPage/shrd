@@ -4,6 +4,7 @@ import User from './user.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+import {addUser} from '../room/room.controller';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -120,6 +121,23 @@ export function me(req, res, next) {
       res.json(user);
     })
     .catch(err => next(err));
+}
+
+/**
+ * Join room
+ */
+export function joinRoom(req, res, next) {
+  var userId = req.user._id;
+  var roomId = req.body.room;
+  console.log("userId", userId);
+  console.log("roomId", roomId);
+  User.findOneAsync({ _id: userId}, '-salt -password')
+    .then(user => {
+      if (!user) return res.status(401).end();
+
+      addUser(roomId, {name: user.name, id: user._id}, res);
+
+    })
 }
 
 /**

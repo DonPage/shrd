@@ -89,6 +89,22 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
     },
 
     /**
+     * Join room
+     *
+     * @param  {String}   roomId
+     * @param  {Function} callback    - optional, function(error, user)
+     * @return {Promise}
+     */
+    joinRoom(roomId, callback) {
+      return User.joinRoom({id: currentUser._id}, {
+        room: roomId
+      },
+        () => safeCb(callback)(null),
+        (err) => safeCb(callback)(err))
+        .$promise;
+    },
+
+    /**
      * Gets all available info on a user
      *   (synchronous|asynchronous)
      *

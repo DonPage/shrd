@@ -17,6 +17,12 @@ function UserResource($resource) {
       params: {
         id:'me'
       }
+    },
+    joinRoom: {
+      method: 'PUT',
+      params: {
+        controller:'joinRoom'
+      }
     }
   });
 }

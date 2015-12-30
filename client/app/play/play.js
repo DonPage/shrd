@@ -8,10 +8,15 @@ angular.module('shrd2App')
         controller: 'PlayController',
         controllerAs: 'player',
         resolve: {
-          loggedIn(Auth, LocStorage, $location) {
+          loginRoom(Auth, LocStorage, $location, $http) {
             Auth.isLoggedIn(res => {
               if (!res) {
                 return LocStorage.create('redirect', $location.path(), () => $location.path('/login'))
+              } else {
+                console.log($location.path().split('/')[2]);
+                //$http.get(`/api/rooms/${$location.path().split('/')[2]}/newPlayer`);
+                Auth.joinRoom($location.path().split('/')[2],(res) => console.log('callback'))
+
               }
             })
           }

@@ -6,6 +6,7 @@
 
     constructor($routeParams, $http, socket) {
       this.$roomId = $routeParams.roomId;
+      console.log(`this.$roomId  ${this.$roomId}`)
       this.roomData = {};
       this.ready = false;
 

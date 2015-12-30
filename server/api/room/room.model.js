@@ -5,7 +5,13 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var RoomSchema = new mongoose.Schema({
   name: String,
   game: String,
-  players: Array,
+  players: [
+    {
+      name: String,
+      id: String,
+      data: String
+    }
+  ],
   stage: String,
   inProgress: Boolean,
   latestAction: String,
