@@ -8,7 +8,8 @@ var RoomSchema = new mongoose.Schema({
   players: Array,
   stage: String,
   inProgress: Boolean,
-  latestAction: String
+  latestAction: String,
+  gameData: Object
 });
 
 export default mongoose.model('Room', RoomSchema);

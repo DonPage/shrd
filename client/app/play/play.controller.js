@@ -4,10 +4,11 @@
 
   class PlayController {
 
-    constructor($routeParams, $http) {
+    constructor($routeParams, $http, socket) {
       this.$roomId = $routeParams.roomId;
       this.roomData = {};
       this.ready = false;
+
 
       $http.get(`/api/rooms/${this.$roomId}`)
         .then(res => {
