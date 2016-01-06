@@ -5,9 +5,38 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
 
 /**
+ * Color Vars
+ */
+$brand-pink: #E43162;
+$brand-darkblue: #2C363F;
+$body-bg: #222930;
+$text-color-primary: #FFF;
+$text-color-secondary: #999;
+
+/**
+ * Font
+ */
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700,300);
+$font-bold: 700;
+$font-normal: 400;
+$font-light: 300;
+
+/**
  * App-wide Styles
  */
+body {
+  background-color: $body-bg;
+  color: $text-color-secondary;
+  font-family: Nunito, "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial
+}
 
+a {
+  color: $brand-primary;
+}
+
+#banner {
+  background-color: $brand-darkblue;
+}
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -28,5 +57,6 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../components/cah-controller/cah-controller.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
+@import '../components/navbar/navbar.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';
 // endinjector

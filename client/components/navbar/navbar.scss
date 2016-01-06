@@ -1,0 +1,40 @@
+.navbar {
+  background-color: $body-bg;
+  border: 1px solid $body-bg;
+  color: $text-color-secondary;
+}
+
+.navbar-default{
+  .navbar-brand {
+    transition: color .2s ease;
+    color: $brand-pink;
+    font-size: 36px;
+    font-weight: $font-normal;
+    &:hover{
+      transition: color .2s ease;
+      color: $text-color-primary;
+    }
+  }
+
+ .navbar-nav {
+    li {
+      a {
+        color: lighten($text-color-secondary, 20%);
+        &:hover{
+          color: $text-color-primary
+        }
+      }
+    }
+  }
+
+}
+
+
+.navbar-default .navbar-nav > .active > a {
+  color: $text-color-primary !important; //bootstrap pls
+  background: transparent;
+
+  &:hover{
+    background-color: transparent;
+  }
+}
