@@ -8,7 +8,9 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
  * Color Vars
  */
 $brand-pink: #E43162;
+$brand-green: #41EFB6;
 $brand-darkblue: #2C363F;
+$brand-blue: #3A3A4F;
 $body-bg: #222930;
 $text-color-primary: #FFF;
 $text-color-secondary: #999;
@@ -32,16 +34,41 @@ body {
 
 a {
   color: $brand-pink;
-  &:hover{
+  &:hover {
     color: $text-color-primary;
     text-decoration: none;
     border-bottom: 1px solid $text-color-primary;
   }
 }
 
+button {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+
+  transition: all .23s;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 16px 30px;
+  color: white;
+  margin-right: 12px;
+  background: none;
+  border: 2px solid white;
+  &:hover {
+    transition: all .23s;
+    color: $brand-pink;
+    border-color: $brand-pink;
+  }
+}
+
 #banner {
   background-color: $brand-darkblue;
 }
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
