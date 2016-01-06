@@ -53,10 +53,10 @@ button {
   font-weight: 600;
   border-radius: 4px;
   padding: 16px 30px;
-  color: white;
+  color: $text-color-primary;
+  border: 2px solid $text-color-primary;
   margin-right: 12px;
   background: none;
-  border: 2px solid white;
   &:hover {
     transition: all .23s;
     color: $brand-pink;
